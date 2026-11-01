@@ -61,6 +61,16 @@ python lessons/01-natural-language-to-tool-calls/evals/run_evals.py
 
 Right now the assistant does one step and shows you raw results. In later lessons it will look at the results and write you an analysis, then decide on a next step by itself. That loop is what makes it an *agent*.
 
+## Real requests need lookups first
+
+"Email the Q3 report to Terri" can't become one tool call. The model doesn't know Terri's email address or which file is "the Q3 report". It needs to look things up first:
+
+1. `list_files` -> finds `q3_sales.csv`
+2. `find_contact("Terri")` -> finds `terri@example.com`
+3. `send_report(file, to)` -> now it has real values to fill in
+
+The model is not guessing the ids. They come from earlier tool results, or from the prompt itself. Either way, the information has to be in the model's context window. We build that loop in Lessons 4 and 5.
+
 ## Business lens
 
 - **The value:** staff ask in plain language; the agent does the routine lookup.
@@ -81,5 +91,10 @@ Answers: [answers.md](answers.md)
 - "Walk me through `translate.py` line by line."
 - "Add a `list_files` tool and update the prompt and evals."
 - "Why did my eval case fail? Suggest a prompt change."
+
+## Further reading
+
+- The original [Factor 1: Natural Language to Tool Calls](https://github.com/humanlayer/12-factor-agents/blob/main/content/factor-01-natural-language-to-tool-calls.md). It uses a payment-link example.
+- [mailcrew](https://github.com/dexhorthy/mailcrew): a real agent that does the lookups (customers, products, prices) before building its final call.
 
 Next: [Lesson 2: Own Your Prompts](../02-own-your-prompts/README.md)
