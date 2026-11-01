@@ -48,4 +48,4 @@ You'll see a pass count per prompt and which cases failed. That's how you know w
 - "Look at which cases `v1_vague.md` fails and explain why."
 - "Make a `v3` prompt that handles typos in file names, and add eval cases for it."
 
-Next: Lesson 3, Own Your Context Window (coming soon).
+Next: [Lesson 3: Own Your Context Window](../03-own-your-context-window/README.md)

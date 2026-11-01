@@ -1,0 +1,5 @@
+customer,email,card_number,plan,monthly_spend
+Ana Ruiz,ana.ruiz@example.com,4111 1111 1111 1111,Pro,120.50
+Ben Okafor,ben.o@example.com,5500-0000-0000-0004,Basic,19.99
+Cara Lin,cara.lin@example.com,3400 000000 00009,Pro,210.00
+Dev Patel,dev.patel@example.com,6011000000000004,Team,540.25

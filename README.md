@@ -22,7 +22,8 @@ Each folder in `lessons/` is one principle:
 |---|--------|--------|
 | 1 | [Natural language to tool calls](lessons/01-natural-language-to-tool-calls/README.md) | Ready |
 | 2 | [Own your prompts](lessons/02-own-your-prompts/README.md) | Ready |
-| 3-12 | Coming soon | |
+| 3 | [Own your context window](lessons/03-own-your-context-window/README.md) | Ready |
+| 4-12 | Coming soon | |
 
 ## Setup
 
