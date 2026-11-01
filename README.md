@@ -15,28 +15,29 @@ Each folder in `lessons/` is one principle:
 | `prompts/` | The prompt, kept as its own file |
 | `evals/` | Test cases to measure how well it works |
 | `exercises.md` | Ways to customize it |
+| `answers.md` | Answers to the "Check yourself" questions |
 
 ## Lessons
 
 | # | Lesson | Status |
 |---|--------|--------|
+| 0 | [Start here](lessons/00-start-here/README.md): what is an agent, setup, tracks | Ready |
 | 1 | [Natural language to tool calls](lessons/01-natural-language-to-tool-calls/README.md) | Ready |
 | 2 | [Own your prompts](lessons/02-own-your-prompts/README.md) | Ready |
 | 3 | [Own your context window](lessons/03-own-your-context-window/README.md) | Ready |
 | 4-12 | Coming soon | |
 
+New here? Start with [Lesson 0](lessons/00-start-here/README.md). Not sure what a word means? See the [glossary](GLOSSARY.md).
+
 ## Setup
 
-You can read every lesson without an account. To **run** the code you need an API key from one provider:
-
-- **Anthropic** (Claude Sonnet): paid, cheap for these lessons.
-- **GitHub Models**: free tier, uses a GitHub token.
+**No account needed.** By default every lesson runs on a free, offline **mock model** (a simple rule-based stand-in, not a real AI). To use a real model, set `PROVIDER=github` (free tier) or `PROVIDER=anthropic` (paid) in `.env`.
 
 ```powershell
 python -m venv .venv
 .venv\Scripts\Activate.ps1
 pip install -e .
-copy .env.example .env   # then fill in your key
+copy .env.example .env   # defaults to the free mock model
 python lessons/01-natural-language-to-tool-calls/starter/main.py "what's in sales.csv?"
 ```
 

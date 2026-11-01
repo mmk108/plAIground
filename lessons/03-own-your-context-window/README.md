@@ -1,5 +1,7 @@
 # Lesson 3: Own Your Context Window
 
+> **Business track:** read this page and run the demo. **Builder track:** also do `exercises.md`. New to a word? See the [glossary](../../GLOSSARY.md).
+
 ## The idea
 
 The model remembers nothing between calls. Every time, it gets one block of text: "here's everything that happened so far, what's next?" That block is the **context window**, and you build it.
@@ -29,7 +31,15 @@ The demo prints the raw customer file, then the context the model would receive.
 
 Regex redaction is a starting point, not a guarantee. It can miss names, addresses, or odd formats. For real sensitive data, drop the columns you don't need entirely and test your redaction.
 
+## Business lens
+
+- **The value:** you control exactly what data leaves your systems. That is the foundation of privacy and compliance.
+- **The risk:** anything in the context is sent to the model provider. Redaction must happen *before* the call, and regex alone isn't enough for regulated data.
+- **Ask your engineers:** what data reaches the model, and how is it tested?
+
 ## Check yourself
+
+Answers: [answers.md](answers.md)
 
 - What would you do before putting a 100,000-row file in the context?
 - Why hide an error once it's fixed? When should you keep it?

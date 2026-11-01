@@ -1,5 +1,7 @@
 # Lesson 1: Natural Language to Tool Calls
 
+> **Business track:** read this page and run the two commands below. **Builder track:** also do `exercises.md`. New to a word? See the [glossary](../../GLOSSARY.md).
+
 ## What you'll build
 
 A tiny assistant that handles everyday tasks you'd normally do by hand:
@@ -59,7 +61,16 @@ python lessons/01-natural-language-to-tool-calls/evals/run_evals.py
 
 Right now the assistant does one step and shows you raw results. In later lessons it will look at the results and write you an analysis, then decide on a next step by itself. That loop is what makes it an *agent*.
 
+## Business lens
+
+- **The value:** staff ask in plain language; the agent does the routine lookup.
+- **The risk:** a model can misread a request. Your rules (validation, allowed-tool list) are what make it safe to use.
+- **A good first use case:** read-only tasks with a clear "unsupported" answer, like reading reports.
+- **Ask your engineers:** what can this agent touch, and what happens when it's wrong?
+
 ## Check yourself
+
+Answers: [answers.md](answers.md)
 
 - Why is validation between the model and the real action important?
 - Is a tool a function or logic? (Hint: both. Which part is which?)

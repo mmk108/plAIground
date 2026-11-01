@@ -1,5 +1,7 @@
 # Lesson 2: Own Your Prompts
 
+> **Business track:** read this page and run the comparison. **Builder track:** also do `exercises.md`. New to a word? See the [glossary](../../GLOSSARY.md).
+
 ## The idea
 
 The prompt is the instruction sheet you hand the model. Many frameworks write it for you behind the scenes (`Agent(role="...", goal="...")`). That's convenient, but when the agent misbehaves you can't see what it was told, so you can't fix it.
@@ -37,7 +39,15 @@ You'll see a pass count per prompt and which cases failed. That's how you know w
 - State rules for edge cases (missing info, unsafe input).
 - Add a failing case to your evals *before* fixing it, so it stays fixed.
 
+## Business lens
+
+- **The value:** the prompt is your agent's policy document. Owning it means you can review, change, and audit it.
+- **The risk:** if a vendor hides the prompt, you can't explain or fix surprising behavior.
+- **Ask your engineers:** where do prompts live, who approves changes, and how do we measure that a change helped?
+
 ## Check yourself
+
+Answers: [answers.md](answers.md)
 
 - Why does a hidden framework prompt make debugging harder?
 - How do you know a prompt edit made things better?
