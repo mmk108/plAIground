@@ -34,7 +34,8 @@ Each folder in `lessons/` is one principle:
 | 10 | [Small, focused agents](lessons/10-small-focused-agents/README.md) | Ready |
 | 11 | [Trigger from anywhere](lessons/11-trigger-from-anywhere/README.md) | Ready |
 | 12 | [Stateless reducer](lessons/12-stateless-reducer/README.md) | Ready |
-| Next | What's next: SDKs, harnesses, skills and plugins | Coming soon |
+| Next | [What's next: SDKs, harnesses, skills and plugins](whats-next/README.md) | Ready |
+| Capstone | [Workflow assessor and GitHub scout](capstone/README.md) | Ready |
 
 New here? Start with [Lesson 0](lessons/00-start-here/README.md). Not sure what a word means? See the [glossary](GLOSSARY.md).
 
