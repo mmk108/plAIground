@@ -28,7 +28,13 @@ Each folder in `lessons/` is one principle:
 | 4 | [Tools are structured outputs](lessons/04-tools-are-structured-outputs/README.md) | Ready |
 | 5 | [Unify execution state](lessons/05-unify-execution-state/README.md) | Ready |
 | 6 | [Launch, pause, resume](lessons/06-launch-pause-resume/README.md) | Ready |
-| 7-12 | Coming soon | |
+| 7 | [Contact humans with tools](lessons/07-contact-humans-with-tools/README.md) | Ready |
+| 8 | [Own your control flow](lessons/08-own-your-control-flow/README.md) | Ready |
+| 9 | [Compact errors](lessons/09-compact-errors/README.md) | Ready |
+| 10 | [Small, focused agents](lessons/10-small-focused-agents/README.md) | Ready |
+| 11 | [Trigger from anywhere](lessons/11-trigger-from-anywhere/README.md) | Ready |
+| 12 | [Stateless reducer](lessons/12-stateless-reducer/README.md) | Ready |
+| Next | What's next: SDKs, harnesses, skills and plugins | Coming soon |
 
 New here? Start with [Lesson 0](lessons/00-start-here/README.md). Not sure what a word means? See the [glossary](GLOSSARY.md).
 

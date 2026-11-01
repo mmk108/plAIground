@@ -58,4 +58,4 @@ Answers: [answers.md](answers.md)
 - "Walk me through `resume()` in `service.py`."
 - "Add a `cancel` command that stops a paused agent and records why."
 
-Next: Lesson 7, Contact Humans With Tools (coming soon).
+Next: [Lesson 7: Contact Humans With Tools](../07-contact-humans-with-tools/README.md)

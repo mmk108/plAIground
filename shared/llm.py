@@ -30,8 +30,8 @@ def _ask_mock(system: str, user: str) -> str:
     import json
     import re
 
-    if "group_sum" in system:
-        return _mock_data_agent(user)
+    if "done_for_now" in system:
+        return _mock_data_agent(system, user)
 
     if "tool" not in system.lower():
         return "[mock model] Set PROVIDER=anthropic or github in .env to get a real answer."
@@ -55,8 +55,8 @@ def _ask_mock(system: str, user: str) -> str:
     return unsupported("No matching tool, or no file name or URL given")
 
 
-def _mock_data_agent(user: str) -> str:
-    """Mock for Lessons 4-6: decides the next step from the event history in the context."""
+def _mock_data_agent(system: str, user: str) -> str:
+    """Mock for Lessons 4-12: decides the next step from the event history in the context."""
     import json
     import re
 
@@ -68,6 +68,8 @@ def _mock_data_agent(user: str) -> str:
     called = set(re.findall(r'"function":\s*"(\w+)"', user))
     results = re.findall(r"<tool_result>\n(.*?)\n</tool_result>", user, re.S)
     last_result = results[-1] if results else ""
+    human_replies = re.findall(r"<human_response>\n(.*?)\n</human_response>", user, re.S)
+    can_ask = "request_human_input" in system
 
     def call(**fields) -> str:
         return json.dumps(fields)
@@ -79,14 +81,29 @@ def _mock_data_agent(user: str) -> str:
         return done("Understood. I did not send it.")
     if last_tag == "tool_result" and "send_report" in called:
         return done("Done. The report was sent.")
+    email = re.search(r"[\w.+-]+@[\w-]+\.[\w.-]+", " ".join([request, *human_replies]))
+    can_send = "- send_report:" in system
+    if low.startswith("send this report") and email and can_send and "send_report" not in called:
+        body = request.split(":\n", 1)[-1]
+        return call(function="send_report", to=email.group(), subject="Sales report", body=body)
+    if "profit" in low and last_tag in ("user_request", "error"):
+        # Practice for Lesson 9: first guess a column that doesn't exist, then fix it from the error
+        column = "units" if last_tag == "error" else "profit"
+        return call(function="group_sum", filename="sales.csv", group_by="region", value_column=column)
     if "files" in low and "list_files" not in called:
         return call(function="list_files")
     wants_data = any(w in low for w in ("sold", "sales", "units", "total", "most", "region", "product"))
     if wants_data and "group_sum" not in called:
         group_by = "product" if "product" in low else "region"
         return call(function="group_sum", filename="sales.csv", group_by=group_by, value_column="units")
-    email = re.search(r"[\w.+-]+@[\w-]+\.[\w.-]+", request)
-    if email and "group_sum" in called and "send_report" not in called:
+    if "email" in low and not email and can_ask and "request_human_input" not in called:
+        return call(
+            function="request_human_input",
+            question="What email address should I send it to?",
+            format="free_text",
+            urgency="low",
+        )
+    if email and can_send and "group_sum" in called and "send_report" not in called:
         return call(function="send_report", to=email.group(), subject="Sales report", body=last_result)
     if last_result:
         return done("Here's what I found:\n" + last_result)

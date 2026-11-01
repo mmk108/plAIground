@@ -48,4 +48,14 @@
 
 **Pause / resume**: stopping an agent at a safe point (saving its thread) and continuing later.
 
+**Guard**: a small rule that can say "no" before a tool runs, and says why.
+
+**Escalate**: hand a problem to a human instead of retrying forever.
+
+**Outbox / channel**: where messages go in and out (email, chat, a web request, a schedule).
+
+**Reducer**: a function that takes the old state and returns a new one. An agent is `new history = step(old history)`.
+
+**Replay**: re-running a past run from its recorded events, with no model or tool calls.
+
 **Virtual environment (`.venv`)**: an isolated folder of Python packages for one project.

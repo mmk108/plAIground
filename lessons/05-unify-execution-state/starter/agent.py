@@ -47,11 +47,14 @@ def summary(thread: Thread) -> dict:
 
 # ---- The loop ----
 
-def decide(thread: Thread, ask: Callable = ask_llm) -> None:
-    """Show the model the thread and record its next step (or an error if the reply is invalid)."""
+def decide(thread: Thread, ask: Callable = ask_llm, tools: list[str] | None = None) -> None:
+    """Show the model the thread and record its next step (or an error if the reply is invalid).
+
+    tools optionally limits which tools this agent may use (Lesson 10).
+    """
     prompt = thread_to_prompt(thread, redact_fn=mask_cards)
     try:
-        call = parse_tool_call(ask(build_system_prompt(), prompt))
+        call = parse_tool_call(ask(build_system_prompt(tools), prompt), allowed=tools)
     except ValueError as err:
         thread.add("error", str(err))  # the model sees this next time and can fix its mistake
         return
@@ -73,6 +76,7 @@ def run(
     ask: Callable = ask_llm,
     pause_before: Callable | None = None,
     max_steps: int = MAX_STEPS,
+    tools: list[str] | None = None,
 ) -> str:
     """Advance the thread until it's done, paused, or out of steps. Returns the final status.
 
@@ -90,7 +94,7 @@ def run(
                 return "paused"
             execute_pending(thread)
         else:
-            decide(thread, ask)
+            decide(thread, ask, tools)
     if status(thread) == "done":
         return "done"
     thread.add("error", f"Stopped after {max_steps} steps without finishing")

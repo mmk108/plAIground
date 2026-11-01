@@ -116,8 +116,11 @@ class ToolCall:
     raw: str  # normalized JSON, stored in the thread
 
 
-def parse_tool_call(raw: str) -> ToolCall:
-    """Turn the model's text into a validated ToolCall. Raises ValueError with a helpful message."""
+def parse_tool_call(raw: str, allowed: list[str] | None = None) -> ToolCall:
+    """Turn the model's text into a validated ToolCall. Raises ValueError with a helpful message.
+
+    allowed limits the menu (Lesson 10 uses this to give each small agent its own tools).
+    """
     cleaned = re.sub(r"^```(?:json)?|```$", "", raw.strip(), flags=re.MULTILINE).strip()
     try:
         obj = json.loads(cleaned)
@@ -126,8 +129,9 @@ def parse_tool_call(raw: str) -> ToolCall:
     if not isinstance(obj, dict) or "function" not in obj:
         raise ValueError('Reply must be a JSON object with a "function" field')
     name = obj["function"]
-    if name not in TOOLS:
-        raise ValueError(f"Unknown tool '{name}'. Choose from: {', '.join(TOOLS)}")
+    menu = allowed if allowed is not None else list(TOOLS)
+    if name not in TOOLS or name not in menu:
+        raise ValueError(f"Unknown tool '{name}'. Choose from: {', '.join(menu)}")
     fields = {k: v for k, v in obj.items() if k != "function"}
     try:
         args = TOOLS[name].params.model_validate(fields)
@@ -146,9 +150,11 @@ def run_tool(call: ToolCall, dry_run: bool = False) -> str:
 
 # ---- 5. Prompt text generated from the registry ----
 
-def tool_prompt() -> str:
+def tool_prompt(names: list[str] | None = None) -> str:
     lines = []
     for tool in TOOLS.values():
+        if names is not None and tool.name not in names:
+            continue
         fields = ", ".join(
             f"{name} ({getattr(f.annotation, '__name__', f.annotation)})"
             + (f": {f.description}" if f.description else "")
@@ -158,5 +164,5 @@ def tool_prompt() -> str:
     return "\n".join(lines)
 
 
-def build_system_prompt() -> str:
-    return PROMPT_FILE.read_text(encoding="utf-8").replace("{{TOOLS}}", tool_prompt())
+def build_system_prompt(names: list[str] | None = None) -> str:
+    return PROMPT_FILE.read_text(encoding="utf-8").replace("{{TOOLS}}", tool_prompt(names))

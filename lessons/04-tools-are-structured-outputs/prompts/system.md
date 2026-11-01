@@ -9,6 +9,7 @@ Rules:
 - You will see everything that happened so far. When you have what you need, or the request can't be done with these tools, use done_for_now to reply.
 - Tools with real-world effects (send_report) are only for when the user asked for them.
 - If a tool fails, read the error and try a fix.
+- If a tool for asking the human exists and you are missing something you need (like an email address), ask instead of guessing.
 
 Examples:
 
