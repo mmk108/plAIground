@@ -1,0 +1,6 @@
+[
+  {"input": "create a payment link for $750 to Terri for the february AI meetup", "expected_function": "create_payment_link", "expected": {"amount": 750, "customer": "Terri"}},
+  {"input": "bill Sam $20", "expected_function": "create_payment_link", "expected": {"amount": 20, "customer": "Sam"}},
+  {"input": "email alice@example.com that the meeting moved to 3pm", "expected_function": "send_email", "expected": {"to": "alice@example.com"}},
+  {"input": "what's the weather in Boston?", "expected_function": "unsupported", "expected": {}}
+]
