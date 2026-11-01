@@ -34,6 +34,12 @@ Each folder in `lessons/` is one principle:
 | 10 | [Small, focused agents](lessons/10-small-focused-agents/README.md) | Ready |
 | 11 | [Trigger from anywhere](lessons/11-trigger-from-anywhere/README.md) | Ready |
 | 12 | [Stateless reducer](lessons/12-stateless-reducer/README.md) | Ready |
+| 13 | See what your agent did (telemetry) | Planned, see [roadmap](whats-next/roadmap-13-18.md) |
+| 14 | Prove it keeps working (evals) | Planned, see [roadmap](whats-next/roadmap-13-18.md) |
+| 15 | SDKs and runtimes, side by side | Planned, see [roadmap](whats-next/roadmap-13-18.md) |
+| 16 | MCP: tools other agents can use | Planned, see [roadmap](whats-next/roadmap-13-18.md) |
+| 17 | Keep it safe (security and guardrails) | Planned, see [roadmap](whats-next/roadmap-13-18.md) |
+| 18 | Run it for a company (enterprise cloud) | Planned, see [roadmap](whats-next/roadmap-13-18.md) |
 | Next | [What's next: SDKs, harnesses, skills and plugins](whats-next/README.md) | Ready |
 | Capstone | [Workflow assessor and GitHub scout](capstone/README.md) | Ready |
 

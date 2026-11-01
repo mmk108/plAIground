@@ -47,6 +47,7 @@ A harness hides decisions. If you can't see them, you can't fix them. Use the fa
 
 1. [The field guide](repos.md): what each repo you picked actually is, checked against its own README.
 2. [Build your own harness](build-your-own.md): how your lesson code grows into a harness, and where a library helps.
+3. [Roadmap for Lessons 13-18](roadmap-13-18.md): telemetry, evals, SDKs, MCP, security and enterprise cloud, with the evidence behind each pick.
 3. [Capstone](../capstone/README.md): a workflow assessor and a GitHub scout, with skill files.
 
 ## Honest caveats
