@@ -36,4 +36,16 @@
 
 **Mock model**: a free stand-in that follows simple rules instead of using real AI. Used here so lessons run without an account.
 
+**Thread**: the ordered list of everything that happened in an agent run. In these lessons it's the agent's only state.
+
+**Event**: one entry in a thread, like a user request, a tool call, a result, or an error.
+
+**State**: what a program remembers right now. *Execution state* is where it is in the process; *business state* is what has happened so far.
+
+**Dry run**: describing what an action would do without actually doing it.
+
+**Approval (human in the loop)**: a person says yes or no before a risky action runs.
+
+**Pause / resume**: stopping an agent at a safe point (saving its thread) and continuing later.
+
 **Virtual environment (`.venv`)**: an isolated folder of Python packages for one project.

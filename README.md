@@ -25,7 +25,10 @@ Each folder in `lessons/` is one principle:
 | 1 | [Natural language to tool calls](lessons/01-natural-language-to-tool-calls/README.md) | Ready |
 | 2 | [Own your prompts](lessons/02-own-your-prompts/README.md) | Ready |
 | 3 | [Own your context window](lessons/03-own-your-context-window/README.md) | Ready |
-| 4-12 | Coming soon | |
+| 4 | [Tools are structured outputs](lessons/04-tools-are-structured-outputs/README.md) | Ready |
+| 5 | [Unify execution state](lessons/05-unify-execution-state/README.md) | Ready |
+| 6 | [Launch, pause, resume](lessons/06-launch-pause-resume/README.md) | Ready |
+| 7-12 | Coming soon | |
 
 New here? Start with [Lesson 0](lessons/00-start-here/README.md). Not sure what a word means? See the [glossary](GLOSSARY.md).
 

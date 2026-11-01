@@ -1,4 +1,5 @@
 .env
 .venv/
+threads/
 __pycache__/
 *.egg-info/

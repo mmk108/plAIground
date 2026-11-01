@@ -30,6 +30,9 @@ def _ask_mock(system: str, user: str) -> str:
     import json
     import re
 
+    if "group_sum" in system:
+        return _mock_data_agent(user)
+
     if "tool" not in system.lower():
         return "[mock model] Set PROVIDER=anthropic or github in .env to get a real answer."
 
@@ -50,6 +53,44 @@ def _ask_mock(system: str, user: str) -> str:
     if not careful:
         return json.dumps({"function": "read_spreadsheet", "filename": "data.csv"})  # a bad guess
     return unsupported("No matching tool, or no file name or URL given")
+
+
+def _mock_data_agent(user: str) -> str:
+    """Mock for Lessons 4-6: decides the next step from the event history in the context."""
+    import json
+    import re
+
+    first = re.search(r"<user_request>\n(.*?)\n</user_request>", user, re.S)
+    request = first.group(1) if first else user
+    low = request.lower()
+    tags = re.findall(r"<(user_request|tool_call|tool_result|error|done_for_now|human_response)>", user)
+    last_tag = tags[-1] if tags else None
+    called = set(re.findall(r'"function":\s*"(\w+)"', user))
+    results = re.findall(r"<tool_result>\n(.*?)\n</tool_result>", user, re.S)
+    last_result = results[-1] if results else ""
+
+    def call(**fields) -> str:
+        return json.dumps(fields)
+
+    def done(message: str) -> str:
+        return call(function="done_for_now", message=message)
+
+    if last_tag == "tool_result" and "rejected" in last_result:
+        return done("Understood. I did not send it.")
+    if last_tag == "tool_result" and "send_report" in called:
+        return done("Done. The report was sent.")
+    if "files" in low and "list_files" not in called:
+        return call(function="list_files")
+    wants_data = any(w in low for w in ("sold", "sales", "units", "total", "most", "region", "product"))
+    if wants_data and "group_sum" not in called:
+        group_by = "product" if "product" in low else "region"
+        return call(function="group_sum", filename="sales.csv", group_by=group_by, value_column="units")
+    email = re.search(r"[\w.+-]+@[\w-]+\.[\w.-]+", request)
+    if email and "group_sum" in called and "send_report" not in called:
+        return call(function="send_report", to=email.group(), subject="Sales report", body=last_result)
+    if last_result:
+        return done("Here's what I found:\n" + last_result)
+    return done("I can't help with that using the tools I have.")
 
 
 def _ask_anthropic(system: str, user: str) -> str:

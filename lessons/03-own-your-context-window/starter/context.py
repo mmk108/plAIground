@@ -40,13 +40,13 @@ def truncate(text: str, max_chars: int = 1500) -> str:
     return text[:max_chars] + f"\n... [truncated {len(text) - max_chars} more characters]"
 
 
-def event_to_prompt(event: Event) -> str:
-    data = truncate(redact(event.data))
+def event_to_prompt(event: Event, redact_fn=redact) -> str:
+    data = truncate(redact_fn(event.data))
     return f"<{event.type}>\n{data}\n</{event.type}>"
 
 
-def thread_to_prompt(thread: Thread, question: str = "What's the next step?") -> str:
+def thread_to_prompt(thread: Thread, question: str = "What's the next step?", redact_fn=redact) -> str:
     # Resolved errors are noise once the problem is fixed, so leave them out
     visible = [e for e in thread.events if not (e.type == "error" and e.resolved)]
-    body = "\n\n".join(event_to_prompt(e) for e in visible)
+    body = "\n\n".join(event_to_prompt(e, redact_fn) for e in visible)
     return f"Here's everything that happened so far:\n\n{body}\n\n{question}"

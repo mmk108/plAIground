@@ -50,4 +50,4 @@ Answers: [answers.md](answers.md)
 - "Walk me through `thread_to_prompt` step by step."
 - "Add redaction for phone numbers and add tests."
 
-Next: Lesson 4, Tools Are Structured Outputs (coming soon).
+Next: [Lesson 4: Tools Are Structured Outputs](../04-tools-are-structured-outputs/README.md)
