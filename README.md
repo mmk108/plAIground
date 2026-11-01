@@ -1,6 +1,6 @@
 # plAIground
 
-Learn to build AI agents, one lesson at a time. Plain-language explanations plus starter Python code you can run and make your own.
+Learn to build AI agents, one lesson at a time. Think *Automate the Boring Stuff with Python*, but for agents: everyday tasks like reading a spreadsheet or pulling text from a web page, explained in plain language, with starter Python code you can run and make your own.
 
 Based on the [12-factor agents](https://github.com/humanlayer/12-factor-agents) principles.
 
@@ -21,7 +21,8 @@ Each folder in `lessons/` is one principle:
 | # | Lesson | Status |
 |---|--------|--------|
 | 1 | [Natural language to tool calls](lessons/01-natural-language-to-tool-calls/README.md) | Ready |
-| 2-12 | Coming soon | |
+| 2 | [Own your prompts](lessons/02-own-your-prompts/README.md) | Ready |
+| 3-12 | Coming soon | |
 
 ## Setup
 
@@ -35,7 +36,7 @@ python -m venv .venv
 .venv\Scripts\Activate.ps1
 pip install -e .
 copy .env.example .env   # then fill in your key
-python lessons/01-natural-language-to-tool-calls/starter/main.py "create a payment link for $750 to Terri"
+python lessons/01-natural-language-to-tool-calls/starter/main.py "what's in sales.csv?"
 ```
 
 ## Use an AI assistant to learn

@@ -8,12 +8,12 @@ from pydantic import TypeAdapter, ValidationError
 from schemas import ToolCall
 from shared.llm import ask_llm
 
-PROMPT_FILE = Path(__file__).parent.parent / "prompts" / "system.md"
+DEFAULT_PROMPT = Path(__file__).parent.parent / "prompts" / "system.md"
 
 
-def determine_next_step(user_text: str) -> ToolCall:
+def determine_next_step(user_text: str, prompt_path: Path = DEFAULT_PROMPT) -> ToolCall:
     """Ask the model for a tool call and validate it. Raises ValueError if invalid."""
-    raw = ask_llm(PROMPT_FILE.read_text(encoding="utf-8"), user_text)
+    raw = ask_llm(prompt_path.read_text(encoding="utf-8"), user_text)
     # Models sometimes wrap JSON in ```json fences
     cleaned = re.sub(r"^```(?:json)?|```$", "", raw.strip(), flags=re.MULTILINE).strip()
     try:

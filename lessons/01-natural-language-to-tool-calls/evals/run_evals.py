@@ -1,4 +1,4 @@
-"""Measure translation accuracy. Run from this folder: python run_evals.py"""
+"""Measure translation accuracy. Run: python evals/run_evals.py"""
 import json
 import sys
 from pathlib import Path
@@ -11,16 +11,12 @@ cases = json.loads((Path(__file__).parent / "cases.json").read_text())
 passed = 0
 for case in cases:
     try:
-        call = determine_next_step(case["input"])
-        got_function = call.function
-        got = call.model_dump()
+        got = determine_next_step(case["input"]).model_dump()
     except ValueError:
-        # 'unsupported' isn't in our schemas, so it is correctly rejected
-        got_function = "unsupported"
-        got = {}
-    ok = got_function == case["expected_function"] and all(
-        got.get(k) == v for k, v in case["expected"].items()
-    )
+        # Rejected by validation (e.g. unsafe path). Counts as 'unsupported'.
+        got = {"function": "unsupported"}
+    # A case passes if every expected field matches
+    ok = all(got.get(k) == v for k, v in case["expected"].items())
     passed += ok
-    print(("PASS" if ok else "FAIL"), "-", case["input"])
+    print("PASS" if ok else "FAIL", "-", case["input"])
 print(f"\n{passed}/{len(cases)} passed")

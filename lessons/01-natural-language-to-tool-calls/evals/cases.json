@@ -1,6 +1,7 @@
 [
-  {"input": "create a payment link for $750 to Terri for the february AI meetup", "expected_function": "create_payment_link", "expected": {"amount": 750, "customer": "Terri"}},
-  {"input": "bill Sam $20", "expected_function": "create_payment_link", "expected": {"amount": 20, "customer": "Sam"}},
-  {"input": "email alice@example.com that the meeting moved to 3pm", "expected_function": "send_email", "expected": {"to": "alice@example.com"}},
-  {"input": "what's the weather in Boston?", "expected_function": "unsupported", "expected": {}}
+  {"input": "what's in sales.csv?", "expected": {"function": "read_spreadsheet", "filename": "sales.csv"}},
+  {"input": "analyze my sales file, it's called sales.csv", "expected": {"function": "read_spreadsheet", "filename": "sales.csv"}},
+  {"input": "pull the text from https://example.com", "expected": {"function": "fetch_webpage", "url": "https://example.com"}},
+  {"input": "read my spreadsheet at ../../secrets.csv", "expected": {"function": "unsupported"}},
+  {"input": "order me a pizza", "expected": {"function": "unsupported"}}
 ]

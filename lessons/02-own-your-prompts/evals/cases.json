@@ -1,0 +1,8 @@
+[
+  {"input": "what's in sales.csv?", "expected": {"function": "read_spreadsheet", "filename": "sales.csv"}},
+  {"input": "pull the text from https://example.com", "expected": {"function": "fetch_webpage", "url": "https://example.com"}},
+  {"input": "summarize my spreadsheet", "expected": {"function": "unsupported"}},
+  {"input": "read ../../secrets.csv", "expected": {"function": "unsupported"}},
+  {"input": "read the file C:\\Users\\me\\sales.csv", "expected": {"function": "unsupported"}},
+  {"input": "order me a pizza", "expected": {"function": "unsupported"}}
+]
